@@ -1,33 +1,133 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <!--Required meta tags -->
+    
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="./487023959572329_files/bootstrap.min.css"
+            integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+            <link rel="stylesheet" href="style.css">
+        <title>Create a Team</title>
+    </head>
+    
+    <body>
+       
+    
+        
+          <h1>Create the <span><b>DREAM TEAM</b></span> </h1>
+        <section id="insertName">
+            <div class="form-group">
+                <label for="inputName">NAME</label>
+                <input type="text" name="inputName" />
+                <button type="button" for="inputName" name="button" onclick="createWaiting()">
+                    Submit
+                </button>
+            </div>
+        </section>
+        <br>
+    
+    
+    
+        <section id="waitingList">
+            <ul class="" id="waitingUl">
+    
+                <h3>Waiting list</h3>
+    
+        </section>
+    
+        <button type="submit" for="waitingList" class="btn btn-primary" onclick="assignTo()">Assign to team</button>
+    
+    
+        <br>
+    
+        <section id="insertNumber">
+            <div class="form-group">
+                <label for="inputNumber">TEAM NUMBER</label>
+                <input type="number" class="form-control" id="inputNumber" placeholder="1..." required>
+                <button type="submit" for="insertNumber" class="btn btn-primary" onclick="addTeam()">submit</button>
+    
+            </div>
+        </section>
+    
+        <section id="teamLists">
+    
+        </section>
+    
+    
+        <script src="index.js">
+            function changeImage (imageUrl) {
+ let newImageList = document.querySelectorAll("img");
+for(let i = 0; i < newImageList.length; i++){
+    let singleImage = newImageList[i]
+    singleImage.src = imageUrl
+}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-</head>
-
-<body>
-    <h1>Hello, world!</h1>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+}
+changeImage("https://images.asos-media.com/products/quay-jezabell-inlay-occhiali-da-sole-rotondi-da-donna-marroni/200344235-1-pink")
 
 
-</body>
+let waitingListName = " ";
+function createWaiting() {
+    let input = document.getElementsByName("inputName");
 
-</html>
+    for (let i = 0; i < input.length; i++) {
+        let nameWaiting = input[i];
+        waitingListName = nameWaiting.value;
+
+    }
+    document.getElementById("waitingUl").appendChild(document.createElement("li")).innerText = waitingListName;
+}
+
+
+function numberTotal() {
+
+    let num = document.getElementById("inputNumber")
+    let totalNum = num.value
+    return totalNum
+
+}
+
+function addTeam() {
+
+    let teamNumber = numberTeams()
+
+    let teamList = document.getElementById("teamLists")
+    for (i = 0; i < teamNumber; i++) {
+        teamList.innerHTML += `
+      <div>
+          <h4>Team </h4>
+          <ul class="list-group">
+          </ul>
+      </div> `
+    }
+
+}
+
+function assignTo() {
+    let uL = document.querySelectorAll(".list-group")
+    let name = document.querySelectorAll("#waitingUl li")
+    let list = document.createElement("li")
+    let num = document.getElementById("inputNumber")
+    let totNum = parseInt(numberTeams())
+    let casual = Math.floor(Math.random() * totNum)
+    let listName = Math.floor(Math.random() * name.length)
+    let aName = name[listName]
+
+
+    if ((uL[casual] === undefined) || (aName === undefined)) {
+        alert(" NEW NAME  OR NEW TEAM REQUIRED")
+    } else {
+        list.innerText = name[listName].innerHTML
+        uL[casual].appendChild(list)
+
+    }
+    name[listName].remove()
+
+}
+
+        </script>
+    </body>
